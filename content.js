@@ -46,6 +46,7 @@ function printCommandLine() {
         const terminal = document.getElementById("terminal");
         let newP = document.createElement("p");
         let input = document.createElement("input");
+        input.setAttribute("autofocus", "");
         terminal.appendChild(newP);
         newP.innerHTML = "guest@oweneaton.com:~$ ";
         newP.appendChild(input);
@@ -55,9 +56,9 @@ function printCommandLine() {
                 input.disabled = true;
             }
         });
-        setTimeout(() => {
-            input.focus();
-        }, 100);
+        // setTimeout(() => {
+        //     input.focus();
+        // }, 100);
     });
 }
 
