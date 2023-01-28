@@ -46,20 +46,21 @@ function printCommandLine() {
         const terminal = document.getElementById("terminal");
         let newP = document.createElement("p");
         let input = document.createElement("input");
-        // input.setAttribute("autofocus", "");
         terminal.appendChild(newP);
         newP.innerHTML = "guest@oweneaton.com:~$ ";
         newP.appendChild(input);
+        input.addEventListener("focus", function() {
+            input.click();
+        });
         input.addEventListener('keyup', function(event) {
             if (event.keyCode === 13) {
                 checkCommand(input.value);
                 input.disabled = true;
             }
         });
-        input.addEventListener("focus", function() {
-            input.click();
-        });
-        input.focus();
+        setTimeout(() => {
+            input.focus();
+        }, 1000);
     });
 }
 
