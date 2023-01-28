@@ -56,10 +56,10 @@ function printCommandLine() {
                 input.disabled = true;
             }
         });
-        setTimeout(() => {
-            input.focus();
+        input.addEventListener("focus", function() {
             input.click();
-        }, 100);
+        });
+        input.focus();
     });
 }
 
