@@ -58,7 +58,7 @@ function printCommandLine() {
         });
         setTimeout(() => {
             input.focus();
-            input.click()
+            input.click();
         }, 100);
     });
 }
