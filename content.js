@@ -55,7 +55,9 @@ function printCommandLine() {
                 input.disabled = true;
             }
         });
-        input.focus();
+        setTimeout(() => {
+            input.focus();
+        }, 100);
     });
 }
 
