@@ -1,13 +1,36 @@
+const snoopy = [
+    "            ,-~~-.___.                               .",
+    "           / ()=(()   \\            .,              \\ | /",
+    "          (   (        0       ;';'  ';'.        '-.;;;.-'",
+    "           \\._\\, ,----'        ';.,;    ,;      -==;;;;;==-",
+    "      ##XXXxxxxxxx                '.';.'         .-';;;'-.",
+    "             /  ---'~;                             / | \\",
+    "            /    /~|-                                '",
+    "          =(   ~~  |",
+    "    /~~~~~~~~~~~~~~~~~~~~~\\",
+    "   /_______________________\\",
+    "  /_________________________\\",
+    " /___________________________\\",
+    "    |____________________|",
+    "    |____________________|",
+    "    |____________________|       ____",
+    "    |                    | \\|/  /____\\    \\\\/   |//   \\||//",
+    " "
+];
+
 const welcome = [
-    "*****************[Version 10.0.19045.2486]******************",
-    "    ____                         ______      __            ",
-    "   / __ \\_      _____  ____     / ____/___ _/ /_____  ____ ",
-    "  / / / / | /| / / _ \\/ __ \\   / __/ / __ `/ __/ __ \\/ __ \\",
-    " / /_/ /| |/ |/ /  __/ / / /  / /___/ /_/ / /_/ /_/ / / / /",
-    " \\____/ |__/|__/\\___/_/ /_/  /_____/\\__,_/\\__/\\____/_/ /_/ ",
+    ".         _  .          .          .    +     .          . ",
+    "  ,-,   .(_)          .            .            .          ",
+    " /.(    .   .      .    .     .     .    .      .   .      ",
+    " \\ {      .           .   .        .           .          /",
+    "  `-`  . .      .  .     /.   .     .    .     .     .   / ",
+    "        .  +       .    /     .          .          .   /  ",
+    "       .            .  /         .            .        *   ",
+    "      .   .      .    *     .     .    .      .   .       .",
+    "  . .        .  .       .   .      .    .     .     .    . ",
     "************************************************************",
-    "*            Welcome to Owen Eaton's portfolio             *",
-    "*       Enter \"help\" for list of available commands        *",
+    "*                 Welcome to my portfolio                  *",
+    "*        Type \"help\" for list of available commands        *",
     "************************************************************"
 ];
 
@@ -60,7 +83,7 @@ function printCommandLine() {
         });
         setTimeout(() => {
             input.focus();
-        }, 500);
+        }, 200);
     });
 }
 
@@ -77,9 +100,11 @@ function checkCommand(input) {
             printMessages([
                 " ",
                 " List of available commands:",
+                " ",
                 " about - displays information about me",
-                " projects - displays a list of my projects",
                 " contact - displays contact information",
+                " projects - displays a list of my projects",
+                " snoopy - displays some really cool art :)",
                 " "
             ]).then(printCommandLine);
             break;
@@ -105,13 +130,6 @@ function checkCommand(input) {
                 " "
             ]).then(printCommandLine);
             break;
-        case "projects":
-            printMessages([" "]);
-            printLink("Wordle Helper","To Project", "https://replit.com/@oeaton/Wordle-Helper?v=1");
-            printLink("This Website", "To Project", "https://replit.com/@oeaton/Website?v=1");
-            printMessages([" "]);
-            printCommandLine();
-            break;
         case "contact":
             printMessages([
                 " ",
@@ -121,6 +139,70 @@ function checkCommand(input) {
             }).then(() => {
                 printMessages([" "]);
             }).then(() => {
+                printCommandLine();
+            });
+            break;    
+        case "projects":
+            printMessages([" "]);
+            printLink("Wordle Helper","To Project", "https://replit.com/@oeaton/Wordle-Helper?v=1");
+            printLink("This Website", "To Project", "https://replit.com/@oeaton/Website?v=1");
+            printMessages([" "]);
+            printCommandLine();
+            break;
+        case "secret":
+            // let userIp;
+            // fetch('https://api.ipify.org?format=json')
+            //     .then(response => response.json())
+            //     .then(data => {
+            //         userIp = data.ip;
+            //     })
+            //     .then(() => {
+            //         fetch(`https://ipinfo.io/${userIp}/json?token=821377ee3c7e0e`)
+            //             .then(response => response.json())
+            //             .then(info => {
+            //                 printMessages(["Country: " + info.country]);
+            //                 printMessages(["Region: " + info.region]);
+            //                 printMessages(["City: " + info.city]);
+            //                 printMessages(["Zip Code: " + info.postal]);
+            //                 printMessages(["Time Zone: " + info.timezone]);
+            //                 printMessages(["Org: " + info.org]);
+            //             });
+            //     });
+
+            let userIp;
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    userIp = data.ip;
+                })
+                .then(() => {
+                    printMessages([" This is your last chance :)", " Loading...", " "]);
+                    setTimeout(() => {
+                        fetch(`https://ipinfo.io/${userIp}/json?token=821377ee3c7e0e`)
+                            .then(response => response.json())
+                            .then(info => {
+                                printMessages([" Country: " + info.country]);
+                                printMessages([" Region: " + info.region]);
+                                printMessages([" City: " + info.city]);
+                                printMessages([" Zip Code: " + info.postal]);
+                                printMessages([" Time Zone: " + info.timezone]);
+                                printMessages([" Org: " + info.org]);
+                            })
+                            .then(() => {
+                                printMessages([" "]);
+                                printMessages([" Sorry :/"]);
+                                printMessages([" "])
+                                    .then(() => {
+                                        printCommandLine();
+                                    })
+                            });
+                    }, 5000);
+                });
+            
+            break;
+        case "snoopy":
+            printMessages([" "]);
+            printMessages(snoopy).then(() => {
                 printCommandLine();
             });
             break;
