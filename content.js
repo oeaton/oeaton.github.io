@@ -156,21 +156,14 @@ function checkCommand(input) {
                 .then(data => {
                     userIp = data.ip;
                 })
-                .then(() =>{
-                    fetch(`https://api.ipgeolocation.io/ipgeo?apiKey=978c6e0cd27343a48a187adaaa86fd75&ip=${userIp}`)
-                        .then(response => response.json())
-                        .then(info => {
-                            printMessages([" "]);
-                            printMessages(["Continent: " + info.continent_name]);
-                            printMessages(["Country: " + info.country_name]);
-                            printMessages(["Country Capital: " + info.country_capital]);
-                            printMessages(["State: " + info.state_prov]);
-                            printMessages(["District: " + info.district]);
-                            printMessages(["City: " + info.city]);
-                            printMessages(["Zip Code: " + info.zipcode]);
-                        });
-                });
-            
+                .then(() => {
+                        fetch(`https://freegeoip.app/json/${userIp}`)
+                            .then(response => response.json())
+                            .then(location => {
+                                console.log(location);
+                                // You can access the location information here, such as location.country_name, location.region_name, etc.
+                            });
+                    });
             break;
         case "snoopy":
             printMessages([" "]);
