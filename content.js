@@ -1,4 +1,4 @@
-const welcome = [
+const snoopy = [
     "            ,-~~-.___.                               .",
     "           / ()=(()   \\            .,              \\ | /",
     "          (   (        0       ;';'  ';'.        '-.;;;.-'",
@@ -15,9 +15,22 @@ const welcome = [
     "    |____________________|",
     "    |____________________|       ____",
     "    |                    | \\|/  /____\\    \\\\/   |//   \\||//",
+    " "
+];
+
+const welcome = [
+    ".         _  .          .          .    +     .          . ",
+    "  ,-,   .(_)          .            .            .          ",
+    " /.(    .   .      .    .     .     .    .      .   .      ",
+    " \\ {      .           .   .        .           .          /",
+    "  `-`  . .      .  .     /.   .     .    .     .     .   / ",
+    "        .  +       .    /     .          .          .   /  ",
+    "       .            .  /         .            .        *   ",
+    "      .   .      .    *     .     .    .      .   .       .",
+    "  . .        .  .       .   .      .    .     .     .    . ",
     "************************************************************",
-    "*            Welcome to Owen Eaton's portfolio             *",
-    "*       Enter \"help\" for list of available commands        *",
+    "*                 Welcome to my portfolio                  *",
+    "*        Type \"help\" for list of available commands        *",
     "************************************************************"
 ];
 
@@ -70,7 +83,7 @@ function printCommandLine() {
         });
         setTimeout(() => {
             input.focus();
-        }, 500);
+        }, 200);
     });
 }
 
@@ -87,9 +100,11 @@ function checkCommand(input) {
             printMessages([
                 " ",
                 " List of available commands:",
+                " ",
                 " about - displays information about me",
-                " projects - displays a list of my projects",
                 " contact - displays contact information",
+                " projects - displays a list of my projects",
+                " snoopy - displays some really cool art :)",
                 " "
             ]).then(printCommandLine);
             break;
@@ -115,13 +130,6 @@ function checkCommand(input) {
                 " "
             ]).then(printCommandLine);
             break;
-        case "projects":
-            printMessages([" "]);
-            printLink("Wordle Helper","To Project", "https://replit.com/@oeaton/Wordle-Helper?v=1");
-            printLink("This Website", "To Project", "https://replit.com/@oeaton/Website?v=1");
-            printMessages([" "]);
-            printCommandLine();
-            break;
         case "contact":
             printMessages([
                 " ",
@@ -131,6 +139,42 @@ function checkCommand(input) {
             }).then(() => {
                 printMessages([" "]);
             }).then(() => {
+                printCommandLine();
+            });
+            break;    
+        case "projects":
+            printMessages([" "]);
+            printLink("Wordle Helper","To Project", "https://replit.com/@oeaton/Wordle-Helper?v=1");
+            printLink("This Website", "To Project", "https://replit.com/@oeaton/Website?v=1");
+            printMessages([" "]);
+            printCommandLine();
+            break;
+        case "secret":
+            let userIp;
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    userIp = data.ip;
+                })
+                .then(() =>{
+                    fetch(`https://api.ipgeolocation.io/ipgeo?apiKey=978c6e0cd27343a48a187adaaa86fd75&ip=${userIp}`)
+                        .then(response => response.json())
+                        .then(info => {
+                            printMessages([" "]);
+                            printMessages(["Continent: " + info.continent_name]);
+                            printMessages(["Country: " + info.country_name]);
+                            printMessages(["Country Capital: " + info.country_capital]);
+                            printMessages(["State: " + info.state_prov]);
+                            printMessages(["District: " + info.district]);
+                            printMessages(["City: " + info.city]);
+                            printMessages(["Zip Code: " + info.zipcode]);
+                        });
+                });
+            
+            break;
+        case "snoopy":
+            printMessages([" "]);
+            printMessages(snoopy).then(() => {
                 printCommandLine();
             });
             break;
