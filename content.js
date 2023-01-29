@@ -52,6 +52,9 @@ function printCommandLine() {
         input.addEventListener("focus", function() {
             input.click();
         });
+        document.addEventListener("click", function (event){
+           input.focus();
+        });
         input.addEventListener('keyup', function(event) {
             if (event.keyCode === 13) {
                 checkCommand(input.value);
