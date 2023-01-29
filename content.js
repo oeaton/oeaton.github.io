@@ -11,6 +11,10 @@ const welcome = [
     "************************************************************"
 ];
 
+document.addEventListener('gesturestart', function (e) {
+    e.preventDefault();
+});
+
 function printMessages(messages) {
     return new Promise((resolve) => {
         const terminal = document.getElementById("terminal");
@@ -18,6 +22,7 @@ function printMessages(messages) {
         let charIndex = 0;
         let newP = document.createElement("p");
         terminal.appendChild(newP);
+        newP.scrollIntoView();
         const intervalId = setInterval(function () {
             if (messageIndex >= messages.length) {
                 clearInterval(intervalId);
@@ -47,11 +52,12 @@ function printCommandLine() {
         let newP = document.createElement("p");
         let input = document.createElement("input");
         terminal.appendChild(newP);
+        newP.scrollIntoView();
         newP.innerHTML = "guest@oweneaton.com:~$ ";
         newP.appendChild(input);
-        input.addEventListener("focus", function() {
-            input.click();
-        });
+        // input.addEventListener("focus", function() {
+        //     input.click();
+        // });
         document.addEventListener("click", function (event){
            input.focus();
         });
@@ -63,7 +69,7 @@ function printCommandLine() {
         });
         setTimeout(() => {
             input.focus();
-        }, 1000);
+        }, 500);
     });
 }
 
@@ -71,6 +77,7 @@ function printLink(message, message2, link) {
     let newP = document.createElement("p");
     newP.innerHTML = "&nbsp;" + message + " <a href='"+ link +"' target='_blank'>" + message2 + "</a>";
     terminal.appendChild(newP);
+    newP.scrollIntoView();
 }
 
 function checkCommand(input) {
