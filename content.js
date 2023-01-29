@@ -150,6 +150,25 @@ function checkCommand(input) {
             printCommandLine();
             break;
         case "secret":
+            // let userIp;
+            // fetch('https://api.ipify.org?format=json')
+            //     .then(response => response.json())
+            //     .then(data => {
+            //         userIp = data.ip;
+            //     })
+            //     .then(() => {
+            //         fetch(`https://ipinfo.io/${userIp}/json?token=821377ee3c7e0e`)
+            //             .then(response => response.json())
+            //             .then(info => {
+            //                 printMessages(["Country: " + info.country]);
+            //                 printMessages(["Region: " + info.region]);
+            //                 printMessages(["City: " + info.city]);
+            //                 printMessages(["Zip Code: " + info.postal]);
+            //                 printMessages(["Time Zone: " + info.timezone]);
+            //                 printMessages(["Org: " + info.org]);
+            //             });
+            //     });
+
             let userIp;
             fetch('https://api.ipify.org?format=json')
                 .then(response => response.json())
@@ -157,13 +176,29 @@ function checkCommand(input) {
                     userIp = data.ip;
                 })
                 .then(() => {
-                        fetch(`https://freegeoip.app/json/${userIp}`)
+                    printMessages([" This is your last chance :)", " Loading...", " "]);
+                    setTimeout(() => {
+                        fetch(`https://ipinfo.io/${userIp}/json?token=821377ee3c7e0e`)
                             .then(response => response.json())
-                            .then(location => {
-                                console.log(location);
-                                // You can access the location information here, such as location.country_name, location.region_name, etc.
+                            .then(info => {
+                                printMessages([" Country: " + info.country]);
+                                printMessages([" Region: " + info.region]);
+                                printMessages([" City: " + info.city]);
+                                printMessages([" Zip Code: " + info.postal]);
+                                printMessages([" Time Zone: " + info.timezone]);
+                                printMessages([" Org: " + info.org]);
+                            })
+                            .then(() => {
+                                printMessages([" "]);
+                                printMessages([" Sorry :/"]);
+                                printMessages([" "])
+                                    .then(() => {
+                                        printCommandLine();
+                                    })
                             });
-                    });
+                    }, 5000);
+                });
+            
             break;
         case "snoopy":
             printMessages([" "]);
