@@ -112,10 +112,12 @@ function checkCommand(input) {
                 " List of available commands:",
                 " ",
                 " about - displays information about me",
+                " bored - let me think of something for you to do",
                 " contact - displays contact information",
                 " findMe - let me see if I can find you...",
                 " projects - displays a list of my projects",
                 " snoopy - displays some really cool art :)",
+                " today - facts about today",
                 " "
             ]).then(printCommandLine);
             break;
@@ -140,6 +142,25 @@ function checkCommand(input) {
                 " I have received the Provost's award.",
                 " "
             ]).then(printCommandLine);
+            break;
+        case "bored":
+            printMessages([
+                " ",
+                " Bored I see, let me think of something for you to do...",
+                " (Thinking really hard)",
+                " "
+            ]);
+            setTimeout(() =>{
+                fetch('https://www.boredapi.com/api/activity/')
+                    .then(response => response.json())
+                    .then(data => {
+                        printMessages([" You should " + data.activity.toLowerCase()])
+                            .then(() => {
+                                printMessages([" "]);
+                                printCommandLine();
+                            })
+                    });
+            }, 5000);
             break;
         case "contact":
             printMessages([
@@ -196,6 +217,45 @@ function checkCommand(input) {
             printMessages(snoopy).then(() => {
                 printCommandLine();
             });
+            break;
+        case "today":
+            const date = new Date();
+            const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Add 1 to month as it returns 0-based index and pad it with 0 if it is a single-digit month
+            const day = date.getDate().toString().padStart(2, '0'); // Pad day with 0 if it is a single-digit day
+            const formattedDate = `${month}/${day}`;
+            fetch(`http://numbersapi.com/${formattedDate}/date`)
+                .then(response => response.text())
+                .then(data => {
+                    printMessages([" "]);
+                    if (data.length > 52) {
+                        let words = data.split(" ");
+                        let line = ` Today:`;
+                        let i = 0;
+                        while (i < words.length) {
+                            if (line.length + words[i].length + 1 <= 59) {
+                                line += " " + words[i];
+                                i++;
+                            } else {
+                                printMessages([line]);
+                                line = " " + words[i];
+                                i++;
+                            }
+                        }
+                        if (line.trim().length > 0) {
+                            printMessages([line]);
+                        }
+                    } else {
+                        printMessages([` Today: ${data}`]);
+                    }
+                })
+                .then(() => {
+                    setTimeout(() => {
+                        printMessages([" "])
+                            .then(() => {
+                                printCommandLine();
+                            });
+                    }, 300);
+                });
             break;
         default:
             printMessages([
