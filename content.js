@@ -1,37 +1,47 @@
-const snoopy = [
-    "            ,-~~-.___.                               .",
-    "           / ()=(()   \\            .,              \\ | /",
-    "          (   (        0       ;';'  ';'.        '-.;;;.-'",
-    "           \\._\\, ,----'        ';.,;    ,;      -==;;;;;==-",
-    "      ##XXXxxxxxxx                '.';.'         .-';;;'-.",
-    "             /  ---'~;                             / | \\",
-    "            /    /~|-                                '",
-    "          =(   ~~  |",
-    "    /~~~~~~~~~~~~~~~~~~~~~\\",
-    "   /_______________________\\",
-    "  /_________________________\\",
-    " /___________________________\\",
-    "    |____________________|",
-    "    |____________________|",
-    "    |____________________|       ____",
-    "    |                    | \\|/  /____\\    \\\\/   |//   \\||//",
-    " "
-];
-
 const welcome = [
-    ".         _  .          .          .    +     .          . ",
-    "  ,-,   .(_)          .            .            .          ",
-    " /.(    .   .      .    .     .     .    .      .   .      ",
-    " \\ {      .           .   .        .           .          /",
-    "  `-`  . .      .  .     /.   .     .    .     .     .   / ",
-    "        .  +       .    /     .          .          .   /  ",
-    "       .            .  /         .            .        *   ",
-    "      .   .      .    *     .     .    .      .   .       .",
+    ".    +    _  .          .          .    +     .     .    . ",
+    "  ,-,   .(_)     /    .     .      .        /   .         .",
+    " /.(    .   .   /  .    .     .     .    . /    .   .      ",
+    " \\ {      .    /      .   .        .  .   /    .          /",
+    "  `-`  . .    * .  .     /.   .     .    *     .     .   / ",
+    " .   .  .  +       .    /     .          .          .   /  ",
+    "   .   .            .  /         .  .         .        *   ",
+    " .    .   .      .    *     .     .    .      .   .       .",
     "  . .        .  .       .   .      .    .     .     .    . ",
     "************************************************************",
     "*                 Welcome to my portfolio                  *",
     "*        Type \"help\" for list of available commands        *",
     "************************************************************"
+];
+
+const snoopy = [
+    "           __-----_.                        ______",
+    "          /  \\      \\           o  O  O   _(      )__",
+    "         /    |  |   \\_---_   o._.      _(           )_",
+    "        |     |            \\   | |\"\"\"\"(_   Let's see... )",
+    "        |     |             |@ | |    (_               _)",
+    "         \\___/   ___       /   | |      (__          _)",
+    "           \\____(____\\___/     | |         (________)",
+    "           |__|                | |          |",
+    "           /   \\-_             | |         |'",
+    "         /      \\_ \"__ _       !_!--v---v--\"",
+    "        /         \"|  |>)      |\"\"\"\"\"\"\"\"|",
+    "       |          _|  | ._--\"\"||        |",
+    "       _\\_____________|_|_____||________|_",
+    "      /                                   \\",
+    "     /_____________________________________\\",
+    "     /                                     \\",
+    "    /_______________________________________\\",
+    "    /                                       \\",
+    "   /_________________________________________\\",
+    "        {                               }",
+    "        <_______________________________|",
+    "        |                               >",
+    "        {_______________________________|         ________",
+    "        <                               }        / SNOOPY \\",
+    "        |_______________________________|       /__________\\",
+    "\\|/       \\\\/             \\||//           |//            ",
+    " "
 ];
 
 function printMessages(messages) {
@@ -103,6 +113,7 @@ function checkCommand(input) {
                 " ",
                 " about - displays information about me",
                 " contact - displays contact information",
+                " findMe - let me see if I can find you...",
                 " projects - displays a list of my projects",
                 " snoopy - displays some really cool art :)",
                 " "
@@ -141,64 +152,44 @@ function checkCommand(input) {
             }).then(() => {
                 printCommandLine();
             });
-            break;    
+            break;
+        case "findme":
+            printMessages([" This is your last chance :)", " Loading...", " "])
+                .then(() => {
+                    setTimeout(() => {
+                        let userIp;
+                        fetch('https://api.ipify.org?format=json')
+                            .then(response => response.json())
+                            .then(data => {
+                                userIp = data.ip;
+                            })
+                            .then(() => {
+                                fetch(`https://ipinfo.io/${userIp}/json?token=821377ee3c7e0e`)
+                                    .then(response => response.json())
+                                    .then(info => {
+                                        printMessages([" Country: " + info.country]);
+                                        printMessages([" Region: " + info.region]);
+                                        printMessages([" City: " + info.city]);
+                                        printMessages([" Zip Code: " + info.postal]);
+                                        printMessages([" Time Zone: " + info.timezone]);
+                                        printMessages([" Org: " + info.org]);
+                                    })
+                                    .then(() => {
+                                        printMessages([" ", "                       \\,`/ / ", "                       _)..  `_", " We'll Stop there...  ( __  -\\", "  Maybe use a VPN         '`.", "                         ( \\>_-_,", "                         _||_ ~-/", " "])
+                                            .then(() => {
+                                                printCommandLine();
+                                            })
+                                    });
+                            });
+                    }, 5000); 
+                });
+            break;
         case "projects":
             printMessages([" "]);
             printLink("Wordle Helper","To Project", "https://replit.com/@oeaton/Wordle-Helper?v=1");
             printLink("This Website", "To Project", "https://replit.com/@oeaton/Website?v=1");
             printMessages([" "]);
             printCommandLine();
-            break;
-        case "secret":
-            // let userIp;
-            // fetch('https://api.ipify.org?format=json')
-            //     .then(response => response.json())
-            //     .then(data => {
-            //         userIp = data.ip;
-            //     })
-            //     .then(() => {
-            //         fetch(`https://ipinfo.io/${userIp}/json?token=821377ee3c7e0e`)
-            //             .then(response => response.json())
-            //             .then(info => {
-            //                 printMessages(["Country: " + info.country]);
-            //                 printMessages(["Region: " + info.region]);
-            //                 printMessages(["City: " + info.city]);
-            //                 printMessages(["Zip Code: " + info.postal]);
-            //                 printMessages(["Time Zone: " + info.timezone]);
-            //                 printMessages(["Org: " + info.org]);
-            //             });
-            //     });
-
-            let userIp;
-            fetch('https://api.ipify.org?format=json')
-                .then(response => response.json())
-                .then(data => {
-                    userIp = data.ip;
-                })
-                .then(() => {
-                    printMessages([" This is your last chance :)", " Loading...", " "]);
-                    setTimeout(() => {
-                        fetch(`https://ipinfo.io/${userIp}/json?token=821377ee3c7e0e`)
-                            .then(response => response.json())
-                            .then(info => {
-                                printMessages([" Country: " + info.country]);
-                                printMessages([" Region: " + info.region]);
-                                printMessages([" City: " + info.city]);
-                                printMessages([" Zip Code: " + info.postal]);
-                                printMessages([" Time Zone: " + info.timezone]);
-                                printMessages([" Org: " + info.org]);
-                            })
-                            .then(() => {
-                                printMessages([" "]);
-                                printMessages([" Sorry :/"]);
-                                printMessages([" "])
-                                    .then(() => {
-                                        printCommandLine();
-                                    })
-                            });
-                    }, 5000);
-                });
-            
             break;
         case "snoopy":
             printMessages([" "]);
@@ -219,7 +210,5 @@ async function doSomething() {
     await printMessages(welcome);
     await printCommandLine();
 }
-
-
 
 doSomething();
