@@ -117,7 +117,7 @@ function checkCommand(input) {
                 " findMe - let me see if I can find you...",
                 " projects - displays a list of my projects",
                 " snoopy - displays some really cool art :)",
-                " today - facts about today",
+//                 " today - facts about today",
                 " "
             ]).then(printCommandLine);
             break;
