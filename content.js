@@ -117,29 +117,21 @@ function checkCommand(input) {
                 " findMe - let me see if I can find you...",
                 " projects - displays a list of my projects",
                 " snoopy - displays some really cool art :)",
-//                 " today - facts about today",
+                " shutdown - hopefully this works",
                 " "
             ]).then(printCommandLine);
             break;
         case "about":
             printMessages([
                 " ",
-                " I am a computer science student at Arizona State",
-                " University's Ira A. Fulton Schools of Engineering, with an",
-                " expected graduation date of May 2025. I have a cumulative",
-                " GPA of 3.78 and a high school diploma from Walden Grove",
-                " High School with a cumulative GPA of 3.85. I have leadership",
-                " experience as a Community Assistant for University Housing,",
-                " where I actively support and empower a community of 58",
-                " residents by connecting them with resources to promote",
-                " academic success and wellness. I also have experience",
-                " working as a electronics associate at Walmart and have",
-                " developed various programming projects including a word game",
-                " helper and a personal website showcasing my programming",
-                " projects. I have experience in programming languages such as",
-                " C/C++, Java, JavaScript, Python, Scheme, Prolog, HTML, CSS,",
-                " and tools such as Microsoft, AWS, Git, GitHub, Linux/Unix.",
-                " I have received the Provost's award.",
+                " Hi there! I'm a Computer Science student at Arizona State",
+                " University and a Community Assistant on campus.  I enjoy",
+                " outdoor activities like fishing in my free time. I also",
+                " enjoy traveling to new places. This summer, I'm interning",
+                " at Caterpillar as a data analyst for Autonomous Mining",
+                " Trucks. I am anticipating my graduation in May 2025.",
+                " Always open for new challenges and connections.",
+                " Let's connect!",
                 " "
             ]).then(printCommandLine);
             break;
@@ -212,50 +204,18 @@ function checkCommand(input) {
             printMessages([" "]);
             printCommandLine();
             break;
+        case "shutdown":
+            printMessages(["Bye."]).then(() => {
+                setTimeout(() => {
+                    window.close();
+                }, 400);
+            });
+            break;
         case "snoopy":
             printMessages([" "]);
             printMessages(snoopy).then(() => {
                 printCommandLine();
             });
-            break;
-        case "today":
-            const date = new Date();
-            const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Add 1 to month as it returns 0-based index and pad it with 0 if it is a single-digit month
-            const day = date.getDate().toString().padStart(2, '0'); // Pad day with 0 if it is a single-digit day
-            const formattedDate = `${month}/${day}`;
-            fetch(`http://numbersapi.com/${formattedDate}/date`)
-                .then(response => response.text())
-                .then(data => {
-                    printMessages([" "]);
-                    if (data.length > 52) {
-                        let words = data.split(" ");
-                        let line = ` Today:`;
-                        let i = 0;
-                        while (i < words.length) {
-                            if (line.length + words[i].length + 1 <= 59) {
-                                line += " " + words[i];
-                                i++;
-                            } else {
-                                printMessages([line]);
-                                line = " " + words[i];
-                                i++;
-                            }
-                        }
-                        if (line.trim().length > 0) {
-                            printMessages([line]);
-                        }
-                    } else {
-                        printMessages([` Today: ${data}`]);
-                    }
-                })
-                .then(() => {
-                    setTimeout(() => {
-                        printMessages([" "])
-                            .then(() => {
-                                printCommandLine();
-                            });
-                    }, 300);
-                });
             break;
         default:
             printMessages([
