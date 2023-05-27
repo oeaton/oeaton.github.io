@@ -207,7 +207,7 @@ function checkCommand(input) {
         case "shutdown":
             printMessages(["Bye."]).then(() => {
                 setTimeout(() => {
-                    window.close();
+                    window.close('','_parent','');
                 }, 400);
             });
             break;
