@@ -208,6 +208,7 @@ function checkCommand(input) {
             printMessages(["Bye."]).then(() => {
                 setTimeout(() => {
                     window.open('','_self').close()
+                    window.location.href = "https://www.google.com";
                 }, 400);
             });
             break;
