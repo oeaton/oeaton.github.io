@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Owen Eaton's portfolio. Arizona State University">
-    <title>guest@oweneaton.com</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="favicon.png">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>guest@oweneaton.com</title>
+  <link rel="icon" href="favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"/>
 </head>
-<body id="body">
-    <div class="terminal" id="terminal"></div>
-    <script src="content.js"></script>
-</body>
+<body>
+<div id="terminal">
+  <div id="output"></div>
+  <div id="input-line">
+    <span id="prompt">$</span>
+    <div id="input" contenteditable="true"></div>
+  </div>
+</div>
 
+<script src="script.js"></script>
+</body>
 </html>

@@ -1,52 +1,99 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
-
-body{
-    display: block;
-    max-width: 100vw;
-    margin: 0 auto;
-    padding: 4px 4px;
-    background-color: black;
-    font-family: Roboto Mono, system-ui, -apple-system, serif;
+/* Basic styling and responsive font sizes */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    color: #fff;
+    font-family: 'Fira Code', system-ui, -apple-system, serif;
+    overflow: hidden;
+    font-size: 18px;
+    line-height: 1.2;
     font-weight: 400;
-    font-size: 16px;
-    letter-spacing: 0.1em;
 }
 
-.terminal{
-    max-width: 100%;
-    display: block;
-}
-
-p{
-    margin: 0;
-    padding: 0;
-    color: white;
-}
-
-input{
-    margin: 0;
-    padding: 0;
-    background: black;
+/* Terminal container */
+#terminal {
     box-sizing: border-box;
-    max-width: 100%;
-    height: 26px;
-    line-height: 26px;
+    padding: 4px 4px;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    font-family: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    font-size: inherit;
+}
+
+/* Output area */
+#output {
+    white-space: pre;
+    font-family: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    font-size: inherit;
+}
+
+/* Input line container */
+#input-line {
+    display: flex;
+    margin-top: 10px;
+}
+
+/* Prompt symbol */
+#prompt {
+    margin-right: 10px;
+    color: #fff;
+    flex-shrink: 0;
+    font-family: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    font-size: inherit;
+}
+
+/* Input field with blinking block cursor */
+#input {
+    flex: 1;
+    background-color: transparent;
+    color: #fff;
     border: none;
     outline: none;
-    color: orange; /* base text color */
-    text-shadow: 0 0 10px #ffa500; /* neon orange glow */
-    font-family: Roboto Mono, system-ui, -apple-system, serif;
-    font-size: 16px;
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    caret-color: white;
+    caret-color: transparent;
+    white-space: nowrap;
+    font-family: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    font-size: inherit;
+    position: relative;
 }
 
-a{
-    color: orange;
-    text-shadow: 0 0 10px #ffa500;
-    font-family: Roboto Mono, system-ui, -apple-system, serif;
-    font-size: 16px;
-    font-weight: 400;
-    letter-spacing: 0.1em;
+#input::after {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 1em;
+    background: #fff;
+    vertical-align: bottom;
+    animation: blink 1s step-start infinite;
+    position: absolute;
+}
+
+/* Blinking animation for cursor */
+@keyframes blink {
+    0% { background: #fff; }
+    50% { background: transparent; }
+    100% { background: #fff; }
+}
+
+/* Smaller font on narrower screens */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+}
+
+/* Dynamically scale font so lines fit */
+@media (max-width: 480px) {
+    body {
+        font-size: calc(100vw / 70);
+    }
 }
