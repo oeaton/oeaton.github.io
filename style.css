@@ -1,0 +1,99 @@
+/* Basic styling and responsive font sizes */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    color: #fff;
+    font-family: 'Fira Code', system-ui, -apple-system, serif;
+    overflow: hidden;
+    font-size: 18px;
+    line-height: 1.2;
+    font-weight: 400;
+}
+
+/* Terminal container */
+#terminal {
+    box-sizing: border-box;
+    padding: 4px 4px;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    font-family: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    font-size: inherit;
+}
+
+/* Output area */
+#output {
+    white-space: pre;
+    font-family: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    font-size: inherit;
+}
+
+/* Input line container */
+#input-line {
+    display: flex;
+    margin-top: 10px;
+}
+
+/* Prompt symbol */
+#prompt {
+    margin-right: 10px;
+    color: #fff;
+    flex-shrink: 0;
+    font-family: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    font-size: inherit;
+}
+
+/* Input field with blinking block cursor */
+#input {
+    flex: 1;
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    outline: none;
+    caret-color: transparent;
+    white-space: nowrap;
+    font-family: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    font-size: inherit;
+    position: relative;
+}
+
+#input::after {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 1em;
+    background: #fff;
+    vertical-align: bottom;
+    animation: blink 1s step-start infinite;
+    position: absolute;
+}
+
+/* Blinking animation for cursor */
+@keyframes blink {
+    0% { background: #fff; }
+    50% { background: transparent; }
+    100% { background: #fff; }
+}
+
+/* Smaller font on narrower screens */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+}
+
+/* Dynamically scale font so lines fit */
+@media (max-width: 480px) {
+    body {
+        font-size: calc(100vw / 70);
+    }
+}
